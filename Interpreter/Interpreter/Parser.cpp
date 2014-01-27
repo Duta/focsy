@@ -1,3 +1,4 @@
+#include <sstream>
 #include "Parser.h"
 
 Parser::Parser() {}
@@ -47,11 +48,33 @@ void Parser::pop() {
 }
 
 void Parser::match(TokenType type) {
-    //TODO
+    if(current == nullptr) {
+        std::stringstream ss;
+        ss << "Unexpected EOF, expected " << toktype2str(type);
+        throw ss.str();
+    }
+    if(current->type != type) {
+        std::stringstream ss;
+        ss << "Unexpected " << toktype2str(current->type);
+        ss << ", expected " << toktype2str(type);
+        throw ss.str();
+    }
+    advance();
 }
 
 void Parser::match(TokenType type, std::string text) {
-    //TODO
+    if(current == nullptr) {
+        std::stringstream ss;
+        ss << "Unexpected EOF, expected '" << text << "'";
+        throw ss.str();
+    }
+    if(current->type != type || current->text != text) {
+        std::stringstream ss;
+        ss << "Unexpected '" << current->text << "'";
+        ss << ", expected '" << text << "'";
+        throw ss.str();
+    }
+    advance();
 }
 
 bool Parser::isSpeculating() const {
