@@ -8,27 +8,6 @@ void pause() {
     system("PAUSE");
 }
 
-std::string toktype2str(Token *token) {
-    switch(token->type) {
-    case TokenType::L_PAREN:      return "L_PAREN";
-    case TokenType::R_PAREN:      return "R_PAREN";
-    case TokenType::L_SQ_BRACK:   return "L_SQ_BRACK";
-    case TokenType::R_SQ_BRACK:   return "R_SQ_BRACK";
-    case TokenType::L_CURLY:      return "L_CURLY";
-    case TokenType::R_CURLY:      return "R_CURLY";
-    case TokenType::COMMA:        return "COMMA";
-    case TokenType::SEMICOLON:    return "SEMICOLON";
-    case TokenType::LESS_THAN:    return "LESS_THAN";
-    case TokenType::GREATER_THAN: return "GREATER_THAN";
-    case TokenType::EQUALS:       return "EQUALS";
-    case TokenType::INT_NUM:      return "INT_NUM";
-    case TokenType::FLOAT_NUM:    return "FLOAT_NUM";
-    case TokenType::IDENT:        return "IDENT";
-    case TokenType::WHITESPACE:   return "WHITESPACE";
-    default: return "<unknown>";
-    }
-}
-
 int main(int argc, char *argv[]) {
     Lexer lexer;
     std::string fileName;
@@ -55,7 +34,7 @@ int main(int argc, char *argv[]) {
             continue;
         }
         std::cout << "TOKEN" << std::endl;
-        std::cout << "  TYPE = " << toktype2str(token) << std::endl;
+        std::cout << "  TYPE = " << toktype2str(token->type) << std::endl;
         std::cout << "  TEXT = '" << token->text << "'" << std::endl;
         std::cout << "  LINE = " << token->line << std::endl;
         std::cout << "  COL  = " << token->col << std::endl;

@@ -26,3 +26,5 @@ struct Token {
     int line;
     int col;
 };
+
+std::string toktype2str(TokenType);
