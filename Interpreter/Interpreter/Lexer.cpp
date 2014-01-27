@@ -26,6 +26,8 @@ std::vector<Token *> Lexer::lex(std::string _input) {
 
 Token * Lexer::lexToken() {
     Token *token = new Token;
+    token->line = line;
+    token->col = col;
     bool matched = true;
     switch(current) {
     case '(':
@@ -92,13 +94,12 @@ Token * Lexer::lexToken() {
         return token;
     }
     delete token;
-    //advance();
-    //return nullptr;
     std::stringstream ss;
     ss << "LEX ERROR:" << std::endl;
     ss << "    Unexpected symbol: " << current << std::endl;
     ss << "    Line: " << line << std::endl;
     ss << "    Column: " << col << std::endl;
+    advance();
     throw ss.str();
 }
 

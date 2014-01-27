@@ -57,6 +57,8 @@ int main(int argc, char *argv[]) {
         std::cout << "TOKEN" << std::endl;
         std::cout << "  TYPE = " << toktype2str(token) << std::endl;
         std::cout << "  TEXT = '" << token->text << "'" << std::endl;
+        std::cout << "  LINE = " << token->line << std::endl;
+        std::cout << "  COL  = " << token->col << std::endl;
     }
     pause();
     return 0;
