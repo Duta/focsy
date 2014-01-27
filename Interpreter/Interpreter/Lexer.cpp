@@ -15,7 +15,7 @@ std::vector<Token *> Lexer::lex(std::string _input) {
     col = 1;
     length = input.length();
     updateCurrent();
-    tokens.clear();
+    std::vector<Token *> tokens;
 
     while(current != EOF_CHAR) {
         tokens.push_back(lexToken());
@@ -137,18 +137,18 @@ void Lexer::advance() {
     updateCurrent();
 }
 
-bool Lexer::isDigit() {
+bool Lexer::isDigit() const {
     return isdigit(current);
 }
 
-bool Lexer::isLetter() {
+bool Lexer::isLetter() const {
     return isalpha(current);
 }
 
-bool Lexer::isAlphanumeric() {
+bool Lexer::isAlphanumeric() const {
     return isalnum(current);
 }
 
-bool Lexer::isWhitespace() {
+bool Lexer::isWhitespace() const {
     return isspace(current);
 }

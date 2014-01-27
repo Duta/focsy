@@ -17,10 +17,10 @@ private:
     void matchWhitespace(Token *);
     void updateCurrent();
     void advance();
-    bool isDigit();
-    bool isLetter();
-    bool isAlphanumeric();
-    bool isWhitespace();
+    bool isDigit() const;
+    bool isLetter() const;
+    bool isAlphanumeric() const;
+    bool isWhitespace() const;
 
     char current;
     int index;
@@ -28,7 +28,6 @@ private:
     int col;
     int length;
     std::string input;
-    std::vector<Token *> tokens;
 
     static const char EOF_CHAR;
 };
