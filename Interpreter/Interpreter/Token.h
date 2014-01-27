@@ -10,10 +10,14 @@ enum class TokenType {
     L_CURLY,
     R_CURLY,
     COMMA,
+    SEMICOLON,
+    LESS_THAN,
+    GREATER_THAN,
+    EQUALS,
     INT_NUM,
     FLOAT_NUM,
     IDENT,
-    WHITESPACE
+    WHITESPACE,
 };
 
 struct Token {

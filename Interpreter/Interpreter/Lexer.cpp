@@ -56,6 +56,22 @@ Token * Lexer::lexToken() {
         token->type = TokenType::COMMA;
         token->text = ",";
         break;
+    case ';':
+        token->type = TokenType::SEMICOLON;
+        token->text = ";";
+        break;
+    case '<':
+        token->type = TokenType::LESS_THAN;
+        token->text = "<";
+        break;
+    case '>':
+        token->type = TokenType::GREATER_THAN;
+        token->text = ">";
+        break;
+    case '=':
+        token->type = TokenType::EQUALS;
+        token->text = "=";
+        break;
     default:
         matched = false;
     }
