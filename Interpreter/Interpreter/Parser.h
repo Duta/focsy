@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stack>
 #include <vector>
 #include "AST.h"
 #include "Token.h"
@@ -15,11 +16,17 @@ private:
     AST * parseAST();
     void updateCurrent();
     void advance();
+    void push();
+    void pop();
+    void match(TokenType);
+    void match(TokenType, std::string);
+    bool isSpeculating() const;
+    bool isForLoop();
+    ForAST * matchForLoop();
 
     std::vector<Token *> tokens;
+    std::stack<int> markStack;
     int index;
     int length;
-    int line;
-    int col;
     Token *current;
 };
