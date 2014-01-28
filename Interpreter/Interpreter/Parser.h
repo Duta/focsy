@@ -11,9 +11,8 @@ public:
     Parser();
     ~Parser();
 
-    std::vector<AST *> parse(std::vector<Token *>);
+    AST * parse(std::vector<Token *>);
 private:
-    AST * parseAST();
     void updateCurrent();
     void advance();
     void push();
@@ -21,8 +20,25 @@ private:
     void match(TokenType);
     void match(TokenType, std::string);
     bool isSpeculating() const;
+    bool is(TokenType);
+    bool is(TokenType, std::string);
+    void matchOptionalWhitespace();
     bool isForLoop();
+    bool isWhileLoop();
+    bool isCompound();
+    bool isStmt();
+    bool isExpr();
+    bool isBool();
+    bool isInt();
+    bool isFloat();
     ForAST * matchForLoop();
+    WhileAST * matchWhileLoop();
+    CompoundAST * matchCompound();
+    StmtAST * matchStmt();
+    ExprAST * matchExpr();
+    BoolAST * matchBool();
+    IntAST * matchInt();
+    FloatAST * matchFloat();
 
     std::vector<Token *> tokens;
     std::stack<int> markStack;

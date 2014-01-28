@@ -1,7 +1,3 @@
-setify(s) {
-    if(member(first(s), rest(s)))
-        return setify(rest(s))
-    return makeList(first(s), setify(rest(s)))
+while(true) {
+    false
 }
-
-setify([1, 2, 3.4, 7, 1.3, 6.2])

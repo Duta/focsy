@@ -21,17 +21,9 @@ enum class ASTType {
 };
 
 struct AST {
+    virtual ~AST() {};
+
     ASTType type;
-    union {
-        StmtAST *stmtAst;
-        CompoundAST *compoundAst;
-        ExprAST *exprAst;
-        BoolAST *boolAst;
-        IntAST *intAst;
-        FloatAST *floatAst;
-        ForAST *forAst;
-        WhileAST *whileAst;
-    };
 };
 
 struct StmtAST : AST {};
