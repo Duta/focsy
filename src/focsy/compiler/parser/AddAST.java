@@ -1,17 +1,26 @@
 package focsy.compiler.parser;
 
+import focsy.compiler.FileRange;
 import focsy.compiler.Token;
 
 /**
  * Created by Bertie on 28/01/14.
  */
 public class AddAST extends ExprAST {
+    private Token plusToken;
     private ExprAST left, right;
 
-    public AddAST(Token plusToken, ExprAST left, ExprAST right) {
-        super(plusToken);
+    public AddAST(ExprAST left, Token plusToken, ExprAST right) {
+        this.plusToken = plusToken;
         this.left = left;
         this.right = right;
+    }
+
+    @Override
+    public FileRange getRange() {
+        return new FileRange(
+                getLeft().getRange().getStart(),
+                getRight().getRange().getEnd());
     }
 
     public ExprAST getLeft() {
@@ -28,5 +37,13 @@ public class AddAST extends ExprAST {
 
     public void setRight(ExprAST right) {
         this.right = right;
+    }
+
+    public Token getPlusToken() {
+        return plusToken;
+    }
+
+    public void setPlusToken(Token plusToken) {
+        this.plusToken = plusToken;
     }
 }

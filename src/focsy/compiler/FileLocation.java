@@ -36,6 +36,6 @@ public class FileLocation {
 
     @Override
     public String toString() {
-        return "FileLocation{" + line + ":" + col + "}";
+        return line + ":" + col;
     }
 }

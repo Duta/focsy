@@ -20,7 +20,7 @@ public class Main {
         // Get the file name
 	    String fileName = "";
         if(args.length == 0) {
-            System.out.print("Enter the name of the file to lex: ");
+            System.out.print("Enter the name of the file to parse: ");
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(System.in));
             try {
@@ -50,21 +50,19 @@ public class Main {
         } catch(LexException ex) {
             System.err.println("Lex error:");
             System.err.println("  Message: " + ex.getMessage());
-            System.err.println("  Line: " + ex.getLoc().getLine());
-            System.err.println("  Col: " + ex.getLoc().getCol());
+            System.err.println("  Location: " + ex.getRange());
             System.err.println("Exiting...");
             System.exit(1);
         }
 
         Parser parser = new Parser();
-        AST ast = null;
+        List<AST> asts = null;
         try {
-            ast = parser.parse(tokens);
+            asts = parser.parse(tokens);
         } catch(ParseException ex) {
             System.err.println("Parse error:");
             System.err.println("  Message: " + ex.getMessage());
-            System.err.println("  Line: " + ex.getLoc().getLine());
-            System.err.println("  Col: " + ex.getLoc().getCol());
+            System.err.println("  Location: " + ex.getRange());
             System.err.println("Exiting...");
             System.exit(1);
         }

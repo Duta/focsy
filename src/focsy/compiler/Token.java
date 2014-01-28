@@ -8,12 +8,12 @@ import focsy.compiler.lexer.TokenType;
 public class Token {
     private final TokenType type;
     private final String text;
-    private final FileLocation loc;
+    private final FileRange range;
 
-    public Token(TokenType type, String text, FileLocation loc) {
+    public Token(TokenType type, String text, FileRange range) {
         this.type = type;
         this.text = text;
-        this.loc = loc;
+        this.range = range;
     }
 
     public TokenType getType() {
@@ -24,13 +24,13 @@ public class Token {
         return text;
     }
 
-    public FileLocation getLoc() {
-        return loc;
+    public FileRange getRange() {
+        return range;
     }
 
     @Override
     public String toString() {
         return "Token{type={" + type + "},text={" + text
-            + "},loc={" + loc + "}}";
+            + "},range={" + range + "}}";
     }
 }

@@ -1,19 +1,19 @@
 package focsy.compiler.parser;
 
-import focsy.compiler.FileLocation;
+import focsy.compiler.FileRange;
 
 /**
  * Created by Bertie on 28/01/14.
  */
 public class ParseException extends RuntimeException {
-    private final FileLocation loc;
+    private final FileRange range;
 
-    public ParseException(String message, FileLocation loc) {
+    public ParseException(String message, FileRange range) {
         super(message);
-        this.loc = loc;
+        this.range = range;
     }
 
-    public FileLocation getLoc() {
-        return loc;
+    public FileRange getRange() {
+        return range;
     }
 }

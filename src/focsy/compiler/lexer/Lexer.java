@@ -1,6 +1,7 @@
 package focsy.compiler.lexer;
 
 import focsy.compiler.FileLocation;
+import focsy.compiler.FileRange;
 import focsy.compiler.Token;
 
 import java.util.ArrayList;
@@ -39,7 +40,6 @@ public class Lexer {
         // Match a basic token (e.g. '(', ';'...)
         Token basic = matchBasic();
         if(basic != null) {
-            advance();
             return basic;
         }
 
@@ -108,21 +108,29 @@ public class Lexer {
     }
 
     private Token makeToken(TokenType type, String text) {
-        return new Token(type, text, startLoc);
+        return new Token(type, text, getRange());
     }
 
     private LexException makeException(String message) {
-        return new LexException(message, loc);
+        return new LexException(message, getRange());
     }
 
     private InternalLexException makeInternalException(String message) {
-        return new InternalLexException(message, loc);
+        return new InternalLexException(message, getRange());
+    }
+
+    private FileRange getRange() {
+        return new FileRange(startLoc, loc);
     }
 
     private void advance() {
-        loc = current == '\n' ? loc.nextLine() : loc.nextCol();
+        loc = nextLoc();
         index++;
         updateCurrent();
+    }
+
+    private FileLocation nextLoc() {
+        return current == '\n' ? loc.nextLine() : loc.nextCol();
     }
 
     private void updateCurrent() {
@@ -134,6 +142,10 @@ public class Lexer {
     }
 
     private Token matchBasic() {
+        char current = this.current;
+        int index = this.index;
+        FileLocation loc = this.loc;
+        advance();
         switch(current) {
             case '(':
                 return makeToken(TokenType.L_PAREN);
@@ -168,6 +180,9 @@ public class Lexer {
             case '\\':
                 return makeToken(TokenType.BACK_SLASH);
             default:
+                this.current = current;
+                this.index = index;
+                this.loc = loc;
                 return null;
         }
     }

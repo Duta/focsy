@@ -29,45 +29,45 @@ public enum TokenType {
     public String toString() {
         switch(this) {
             case L_PAREN:
-                return "LeftParen";
+                return "a '('";
             case R_PAREN:
-                return "RightParen";
+                return "a ')'";
             case L_SQ_BRACK:
-                return "LeftSquareBracket";
+                return "a '['";
             case R_SQ_BRACK:
-                return "RightSquareBracket";
+                return "a ']'";
             case L_CURLY:
-                return "LeftCurlyBracket";
+                return "a '{'";
             case R_CURLY:
-                return "RightCurlyBracket";
+                return "a '}'";
             case COMMA:
-                return "Comma";
+                return "a ','";
             case SEMICOLON:
-                return "Semicolon";
+                return "a ';'";
             case LESS_THAN:
-                return "LessThan";
+                return "a '<'";
             case GREATER_THAN:
-                return "GreaterThan";
+                return "a '>'";
             case EQUALS:
-                return "Equals";
+                return "a '='";
             case PLUS:
-                return "Plus";
+                return "a '+'";
             case MINUS:
-                return "Minus";
+                return "a '-'";
             case ASTERISK:
-                return "Asterisk";
+                return "a '*'";
             case FWD_SLASH:
-                return "ForwardSlash";
+                return "a '/'";
             case BACK_SLASH:
-                return "BackwardSlash";
+                return "a '\\'";
             case INT_NUM:
-                return "IntegerNumber";
+                return "an int literal";
             case FLOAT_NUM:
-                return "FloatingPointNumber";
+                return "a float literal";
             case IDENT:
-                return "Identifier";
+                return "an identifier";
             case WHITESPACE:
-                return "Whitespace";
+                return "whitespace";
             default:
                 return "<Unknown>";
         }
