@@ -41,9 +41,10 @@ public class Main {
         }
 
         // Lex the file's contents into tokens
+        Lexer lexer = new Lexer();
         List<Token> tokens = null;
         try {
-            tokens = new Lexer().lex(file);
+            tokens = lexer.lex(file);
         } catch(LexException ex) {
             System.err.println("Lex error:");
             System.err.println("  Message: " + ex.getMessage());
@@ -60,9 +61,8 @@ public class Main {
         }
     }
 
-    static String readFile(String path, Charset encoding)
-            throws IOException
-    {
+    private static String readFile(String path, Charset encoding)
+            throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return encoding.decode(ByteBuffer.wrap(encoded)).toString();
     }
