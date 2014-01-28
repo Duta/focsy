@@ -1,22 +1,19 @@
 package focsy.compiler.lexer;
 
+import focsy.compiler.FileLocation;
+
 /**
  * Created by Bertie on 28/01/14.
  */
 public class LexException extends RuntimeException {
-    private final int line, col;
+    private final FileLocation loc;
 
-    public LexException(String message, int line, int col) {
+    public LexException(String message, FileLocation loc) {
         super(message);
-        this.line = line;
-        this.col = col;
+        this.loc = loc;
     }
 
-    public int getLine() {
-        return line;
-    }
-
-    public int getCol() {
-        return col;
+    public FileLocation getLoc() {
+        return loc;
     }
 }

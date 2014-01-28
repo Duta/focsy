@@ -48,8 +48,8 @@ public class Main {
         } catch(LexException ex) {
             System.err.println("Lex error:");
             System.err.println("  Message: " + ex.getMessage());
-            System.err.println("  Line: " + ex.getLine());
-            System.err.println("  Col: " + ex.getCol());
+            System.err.println("  Line: " + ex.getLoc().getLine());
+            System.err.println("  Col: " + ex.getLoc().getCol());
             System.err.println("Exiting...");
             System.exit(1);
         }

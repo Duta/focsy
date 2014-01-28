@@ -1,18 +1,19 @@
 package focsy.compiler.lexer;
 
+import focsy.compiler.FileLocation;
+
 /**
  * Created by Bertie on 28/01/14.
  */
 public class Token {
     private final TokenType type;
     private final String text;
-    private final int line, col;
+    private final FileLocation loc;
 
-    public Token(TokenType type, String text, int line, int col) {
+    public Token(TokenType type, String text, FileLocation loc) {
         this.type = type;
         this.text = text;
-        this.line = line;
-        this.col = col;
+        this.loc = loc;
     }
 
     public TokenType getType() {
@@ -23,17 +24,13 @@ public class Token {
         return text;
     }
 
-    public int getLine() {
-        return line;
-    }
-
-    public int getCol() {
-        return col;
+    public FileLocation getLoc() {
+        return loc;
     }
 
     @Override
     public String toString() {
         return "Token{type={" + type + "},text={" + text
-            + "},line={" + line + "},col={" + col + "}";
+            + "},loc={" + loc + "}}";
     }
 }

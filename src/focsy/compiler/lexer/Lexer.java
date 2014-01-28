@@ -1,5 +1,7 @@
 package focsy.compiler.lexer;
 
+import focsy.compiler.FileLocation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,14 +9,10 @@ import java.util.List;
  * Created by Bertie on 28/01/14.
  */
 public class Lexer {
-    private static final int
-        INITIAL_LINE = 1,
-        INITIAL_COL = 1;
     private String input;
     private int index;
-    private int line, col;
-    private int startLine, startCol;
     private char current;
+    private FileLocation loc, startLoc;
 
     public List<Token> lex(String input) {
         if(input == null || input.isEmpty()) {
@@ -22,8 +20,7 @@ public class Lexer {
         }
         this.input = input;
         this.index = 0;
-        this.line = INITIAL_LINE;
-        this.col = INITIAL_COL;
+        loc = new FileLocation();
         updateCurrent();
 
         List<Token> tokens = new ArrayList<Token>();
@@ -66,8 +63,7 @@ public class Lexer {
     }
 
     private void markTokenStart() {
-        startLine = line;
-        startCol = col;
+        startLoc = loc;
     }
 
     private Token makeToken(TokenType type) {
@@ -111,24 +107,19 @@ public class Lexer {
     }
 
     private Token makeToken(TokenType type, String text) {
-        return new Token(type, text, startLine, startCol);
+        return new Token(type, text, startLoc);
     }
 
     private LexException makeException(String message) {
-        return new LexException(message, line, col);
+        return new LexException(message, loc);
     }
 
     private InternalLexException makeInternalException(String message) {
-        return new InternalLexException(message, line, col);
+        return new InternalLexException(message, loc);
     }
 
     private void advance() {
-        if(current == '\n') {
-            line++;
-            col = INITIAL_COL;
-        } else {
-            col++;
-        }
+        loc = current == '\n' ? loc.nextLine() : loc.nextCol();
         index++;
         updateCurrent();
     }
