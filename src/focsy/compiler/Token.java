@@ -1,6 +1,6 @@
-package focsy.compiler.lexer;
+package focsy.compiler;
 
-import focsy.compiler.FileLocation;
+import focsy.compiler.lexer.TokenType;
 
 /**
  * Created by Bertie on 28/01/14.

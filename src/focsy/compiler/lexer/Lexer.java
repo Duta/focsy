@@ -1,6 +1,7 @@
 package focsy.compiler.lexer;
 
 import focsy.compiler.FileLocation;
+import focsy.compiler.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,10 @@ public class Lexer {
 
     public List<Token> lex(String input) {
         if(input == null || input.isEmpty()) {
-            return new ArrayList<Token>();
+            return null;
         }
         this.input = input;
-        this.index = 0;
+        index = 0;
         loc = new FileLocation();
         updateCurrent();
 

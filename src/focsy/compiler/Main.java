@@ -2,7 +2,9 @@ package focsy.compiler;
 
 import focsy.compiler.lexer.LexException;
 import focsy.compiler.lexer.Lexer;
-import focsy.compiler.lexer.Token;
+import focsy.compiler.parser.AST;
+import focsy.compiler.parser.ParseException;
+import focsy.compiler.parser.Parser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,11 +56,20 @@ public class Main {
             System.exit(1);
         }
 
-        // Temporary: Print the tokens
-        System.out.println("Tokens:");
-        for(Token token : tokens) {
-            System.out.println(" - " + token);
+        Parser parser = new Parser();
+        AST ast = null;
+        try {
+            ast = parser.parse(tokens);
+        } catch(ParseException ex) {
+            System.err.println("Parse error:");
+            System.err.println("  Message: " + ex.getMessage());
+            System.err.println("  Line: " + ex.getLoc().getLine());
+            System.err.println("  Col: " + ex.getLoc().getCol());
+            System.err.println("Exiting...");
+            System.exit(1);
         }
+
+        System.out.println("Successfully parsed");
     }
 
     private static String readFile(String path, Charset encoding)
