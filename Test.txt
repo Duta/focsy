@@ -1,9 +1,3 @@
-123 + 456 + 789;
-0;
-{
-    {
-        3 + 6243 + 2346 + 2;
-        632 + 6432;
-    }
-    3156 + 312;
-}
+numApples = 17;
+numOranges = 3;
+numFruit = numApples + numOranges;

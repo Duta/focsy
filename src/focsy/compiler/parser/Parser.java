@@ -14,12 +14,14 @@ import java.util.Stack;
 public class Parser {
     private final BasicParser
             addParser = new AddParser(),
+            assignParser = new AssignParser(),
             compoundStmtParser = new CompoundStmtParser(),
             exprParser = new ExprParser(),
             intParser = new IntParser(),
             mainParser = new MainParser(),
             simpleStmtParser = new SimpleStmtParser(),
-            stmtParser = new StmtParser();
+            stmtParser = new StmtParser(),
+            varParser = new VarParser();
     private List<Token> tokens;
     private Stack<Integer> indices;
     private int index;
@@ -135,16 +137,37 @@ public class Parser {
     }
 
     public class AddParser extends BasicParser {
+        private boolean blocking;
+
         @Override
         public AST match() {
+            if(blocking) {
+                throw makeInternalException("Tried to match add while blocking");
+            }
             skipWhitespace();
-            ExprAST left = (ExprAST) intParser.match();
+            blocking = true;
+            ExprAST left = (ExprAST) exprParser.match();
+            blocking = false;
             skipWhitespace();
             Token token = matchToken(TokenType.PLUS);
             skipWhitespace();
             ExprAST right = (ExprAST) exprParser.match();
             skipWhitespace();
             return new AddAST(left, token, right);
+        }
+    }
+
+    public class AssignParser extends BasicParser {
+        @Override
+        public AST match() {
+            skipWhitespace();
+            Token identToken = matchToken(TokenType.IDENT);
+            skipWhitespace();
+            Token equalsToken = matchToken(TokenType.EQUALS);
+            skipWhitespace();
+            ExprAST expr = (ExprAST) exprParser.match();
+            skipWhitespace();
+            return new AssignAST(identToken, equalsToken, expr);
         }
     }
 
@@ -168,11 +191,17 @@ public class Parser {
     public class ExprParser extends BasicParser {
         @Override
         public AST match() {
+            if(assignParser.matches()) {
+                return assignParser.match();
+            }
             if(addParser.matches()) {
                 return addParser.match();
             }
             if(intParser.matches()) {
                 return intParser.match();
+            }
+            if(varParser.matches()) {
+                return varParser.match();
             }
             throw makeMatchFailureException("an expression");
         }
@@ -220,6 +249,16 @@ public class Parser {
                 return simpleStmtParser.match();
             }
             throw makeMatchFailureException("a statement");
+        }
+    }
+
+    public class VarParser extends BasicParser {
+        @Override
+        public AST match() {
+            skipWhitespace();
+            Token identToken = matchToken(TokenType.IDENT);
+            skipWhitespace();
+            return new VarAST(identToken);
         }
     }
 }
