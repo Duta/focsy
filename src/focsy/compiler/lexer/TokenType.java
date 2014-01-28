@@ -15,6 +15,11 @@ public enum TokenType {
     LESS_THAN,
     GREATER_THAN,
     EQUALS,
+    PLUS,
+    MINUS,
+    ASTERISK,
+    FWD_SLASH,
+    BACK_SLASH,
     INT_NUM,
     FLOAT_NUM,
     IDENT,
@@ -45,6 +50,16 @@ public enum TokenType {
                 return "GreaterThan";
             case EQUALS:
                 return "Equals";
+            case PLUS:
+                return "Plus";
+            case MINUS:
+                return "Minus";
+            case ASTERISK:
+                return "Asterisk";
+            case FWD_SLASH:
+                return "ForwardSlash";
+            case BACK_SLASH:
+                return "BackwardSlash";
             case INT_NUM:
                 return "IntegerNumber";
             case FLOAT_NUM:
