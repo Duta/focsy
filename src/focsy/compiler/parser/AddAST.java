@@ -11,8 +11,8 @@ public class AddAST extends ExprAST {
     private ExprAST left, right;
 
     public AddAST(ExprAST left, Token plusToken, ExprAST right) {
-        this.plusToken = plusToken;
         this.left = left;
+        this.plusToken = plusToken;
         this.right = right;
     }
 
@@ -45,5 +45,10 @@ public class AddAST extends ExprAST {
 
     public void setPlusToken(Token plusToken) {
         this.plusToken = plusToken;
+    }
+
+    @Override
+    public String toString() {
+        return left.toString() + plusToken.toString() + right.toString();
     }
 }

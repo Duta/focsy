@@ -55,6 +55,7 @@ public class Main {
             System.exit(1);
         }
 
+        // Parse the tokens into ASTs
         Parser parser = new Parser();
         List<AST> asts = null;
         try {
@@ -67,7 +68,10 @@ public class Main {
             System.exit(1);
         }
 
-        System.out.println("Successfully parsed");
+        // Print the ASTs
+        for(AST ast : asts) {
+            System.out.println(ast);
+        }
     }
 
     private static String readFile(String path, Charset encoding)

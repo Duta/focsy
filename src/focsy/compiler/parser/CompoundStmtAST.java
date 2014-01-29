@@ -18,13 +18,6 @@ public class CompoundStmtAST extends StmtAST {
         this.closeBrace = closeBrace;
     }
 
-    @Override
-    public FileRange getRange() {
-        return new FileRange(
-                openBrace.getRange().getStart(),
-                closeBrace.getRange().getEnd());
-    }
-
     public Token getOpenBrace() {
         return openBrace;
     }
@@ -47,5 +40,23 @@ public class CompoundStmtAST extends StmtAST {
 
     public void setCloseBrace(Token closeBrace) {
         this.closeBrace = closeBrace;
+    }
+
+    @Override
+    public FileRange getRange() {
+        return new FileRange(
+                openBrace.getRange().getStart(),
+                closeBrace.getRange().getEnd());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(openBrace);
+        for(StmtAST stmt : stmts) {
+            sb.append(stmt);
+        }
+        sb.append(closeBrace);
+        return sb.toString();
     }
 }

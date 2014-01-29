@@ -47,4 +47,10 @@ public class AssignAST extends ExprAST {
                 identToken.getRange().getStart(),
                 expr.getRange().getEnd());
     }
+
+    @Override
+    public String toString() {
+        return identToken.toString() + equalsToken.toString()
+                + expr.toString();
+    }
 }

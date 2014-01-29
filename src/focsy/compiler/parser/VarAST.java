@@ -25,4 +25,9 @@ public class VarAST extends ExprAST {
     public FileRange getRange() {
         return identToken.getRange();
     }
+
+    @Override
+    public String toString() {
+        return identToken.toString();
+    }
 }

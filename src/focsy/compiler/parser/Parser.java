@@ -70,6 +70,11 @@ public class Parser {
         }
     }
 
+    private boolean isToken(TokenType type) {
+        Token current = current();
+        return current != null && current.getType() == type;
+    }
+
     private Token matchToken(TokenType type) {
         Token current = current();
         if(current != null && current.getType() == type) {
@@ -177,7 +182,7 @@ public class Parser {
             skipWhitespace();
             Token openBrace = matchToken(TokenType.L_CURLY);
             List<StmtAST> stmts = new ArrayList<StmtAST>();
-            while(stmtParser.matches()) {
+            while(!isToken(TokenType.R_CURLY)) {
                 skipWhitespace();
                 stmts.add((StmtAST) stmtParser.match());
             }

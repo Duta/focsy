@@ -25,4 +25,9 @@ public class IntAST extends ExprAST {
     public FileRange getRange() {
         return intToken.getRange();
     }
+
+    @Override
+    public String toString() {
+        return intToken.toString();
+    }
 }

@@ -1,3 +1,7 @@
 numApples = 17;
 numOranges = 3;
 numFruit = numApples + numOranges;
+{
+    i = j = 1;
+    k = i + j;
+}

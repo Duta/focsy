@@ -37,4 +37,9 @@ public class SimpleStmtAST extends StmtAST {
                 expr.getRange().getStart(),
                 semicolonToken.getRange().getEnd());
     }
+
+    @Override
+    public String toString() {
+        return expr.toString() + semicolonToken.toString();
+    }
 }
